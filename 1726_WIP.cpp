@@ -60,9 +60,7 @@ int main(void)
 		Node n;
 		c = q.front();
 		q.pop();
-
-		//printf("%d %d %d\n", c.x, c.y, c.d);
-
+		
 		if (c.x == ex - 1 && c.y == ey - 1 && c.d == ed)
 		{
 			answ = c.op;
@@ -116,8 +114,11 @@ int main(void)
 		switch (c.d) {
 		case UP:
 		{
-			for (k = c.x - 1; k >= 0; k--)
+			for (k = c.x - 1; k >= c.x - 3; k--)
 			{
+				if (k < 0)
+					break;
+								
 				if (map[k][c.y] == 0 && v[k][c.y][UP] == 0) {
 										
 					n.d = c.d;
@@ -134,8 +135,11 @@ int main(void)
 		break;
 		case LEFT:
 		{
-			for (k = c.y - 1; k >= 0; k--)
+			for (k = c.y - 1; k >= c.y-3; k--)
 			{
+				if (k < 0)
+					break;
+
 				if (map[c.x][k] == 0 && v[c.x][k][LEFT] == 0) {
 					n.y = k;
 					n.x = c.x;
@@ -150,8 +154,11 @@ int main(void)
 		break;
 		case RIGHT:
 		{
-			for (k = c.y + 1; k < M; k++)
+			for (k = c.y + 1; k <= c.y + 3; k++)
 			{
+				if (k >= M)
+					break;
+
 				if (map[c.x][k] == 0 && v[c.x][k][RIGHT] == 0) {
 					n.x = c.x;
 					n.y = k;
@@ -166,8 +173,11 @@ int main(void)
 		break;
 		case DOWN:
 		{
-			for (k = c.x + 1; k < N; k++)
+			for (k = c.x + 1; k <= c.x+3; k++)
 			{
+				if (k >= N)
+					break;
+
 				if (map[k][c.y] == 0 && v[k][c.y][DOWN] == 0) {
 					n.y = c.y;
 					n.x = k;
